@@ -102,19 +102,19 @@ public class VirtualPetTest {
 	}
 	
 	@Test
-	public void hungryPetEats10DecreasesTrained20() {
+	public void hungryPetEats10DecreasesTrained40() {
 		VirtualPet underTest = new VirtualPet(50,10,50,null);
 		underTest.tick();
 		assertEquals(40,underTest.getHunger());
-		assertEquals(30,underTest.getHappiness());
+		assertEquals(10,underTest.getHappiness());
 	}
 	
 	@Test
-	public void thirstyPetDrinks20DecreasesTrained20() {
+	public void thirstyPetDrinks20DecreasesTrained40() {
 		VirtualPet underTest = new VirtualPet(10,50,50,null);
 		underTest.tick();
 		assertEquals(30,underTest.getThirst());
-		assertEquals(30,underTest.getHappiness());
+		assertEquals(10,underTest.getHappiness());
 	}
 	
 	@Test
