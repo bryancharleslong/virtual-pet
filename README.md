@@ -8,7 +8,7 @@ Project for test driven development of a class and methods.
 
 ## Gameplay
 - Pet thirst and hunger decreases on each input. Pet happiness decreases on each input.
-- Pet will feed and water itself if not done by user.
+- Pet will eventually feed and water itself if not done by user.
 - User can choose to play video games, and pet will react based on happiness.
 - Three options to choose how to play with pet.
 
