@@ -28,14 +28,14 @@ public class VirtualPetTest {
 	}
 
 	@Test
-	public void tickShouldDecreaseTrained1() {
+	public void tickShouldDecreaseHappiness1() {
 		VirtualPet underTest = new VirtualPet(0, 0, 2, null);
 		underTest.tick();
 		assertEquals(1, underTest.getHappiness());
 	}
 
 	@Test
-	public void tickTrainedMinimumIs0() {
+	public void tickHappinessMinimumIs0() {
 		VirtualPet underTest = new VirtualPet(0, 0, 0, null);
 		underTest.tick();
 		assertEquals(0, underTest.getHappiness());
@@ -44,35 +44,35 @@ public class VirtualPetTest {
 	@Test
 	public void feedShouldDecreaseHunger5() {
 		VirtualPet underTest = new VirtualPet(10, 0, 0, null);
-		underTest.menuAction("1","");
+		underTest.petAction("1","");
 		assertEquals(5, underTest.getHunger());
 	}
 
 	@Test
 	public void waterShouldDecreaseThirst3() {
 		VirtualPet underTest = new VirtualPet(0, 10, 0, null);
-		underTest.menuAction("2","");
+		underTest.petAction("2","");
 		assertEquals(7, underTest.getThirst());
 	}
 
 	@Test
-	public void playWalkShouldIncreaseTrained3() {
+	public void playWalkShouldIncreaseHappiness3() {
 		VirtualPet underTest = new VirtualPet(0, 0, 0, null);
-		underTest.menuAction("3","1");
+		underTest.petAction("3","1");
 		assertEquals(3, underTest.getHappiness());
 	}
 	
 	@Test
-	public void playTricksShouldIncreaseTrained6() {
+	public void playTricksShouldIncreaseHappiness6() {
 		VirtualPet underTest = new VirtualPet(0, 0, 0, null);
-		underTest.menuAction("3","3");
+		underTest.petAction("3","3");
 		assertEquals(6,underTest.getHappiness());
 	}
 
 	@Test
 	public void action1shouldFeed() {
 		VirtualPet underTest = new VirtualPet(10, 10, 10, null);
-		String message = underTest.menuAction("1", "");
+		String message = underTest.petAction("1", "");
 		assertEquals(5, underTest.getHunger());
 		assertTrue(message.contains("You feed"));
 
@@ -81,28 +81,28 @@ public class VirtualPetTest {
 	@Test
 	public void action2shouldWater() {
 		VirtualPet underTest = new VirtualPet(10, 10, 10, null);
-		String message = underTest.menuAction("2", "");
+		String message = underTest.petAction("2", "");
 		assertEquals(7, underTest.getThirst());
 		assertTrue(message.contains("water bowl"));
 
 	}
 
 	@Test
-	public void trainedPetShouldWaitWhileGaming() {
+	public void happyPetShouldWaitWhileGaming() {
 		VirtualPet underTest = new VirtualPet(10, 10, 50, null);
-		String message = underTest.menuAction("4", "");
+		String message = underTest.petAction("4", "");
 		assertTrue(message.contains("waits quietly"));
 	}
 
 	@Test
-	public void untrainedPetDestroysWhileGaming() {
+	public void unhappyPetDestroysWhileGaming() {
 		VirtualPet underTest = new VirtualPet(10, 10, 10, null);
-		String message = underTest.menuAction("4", "");
+		String message = underTest.petAction("4", "");
 		assertTrue(message.contains("destroys furniture"));
 	}
 	
 	@Test
-	public void hungryPetEats10DecreasesTrained40() {
+	public void hungryPetEats10DecreasesHappiness40() {
 		VirtualPet underTest = new VirtualPet(50,10,50,null);
 		underTest.tick();
 		assertEquals(40,underTest.getHunger());
@@ -110,7 +110,7 @@ public class VirtualPetTest {
 	}
 	
 	@Test
-	public void thirstyPetDrinks20DecreasesTrained40() {
+	public void thirstyPetDrinks20DecreasesHappiness40() {
 		VirtualPet underTest = new VirtualPet(10,50,50,null);
 		underTest.tick();
 		assertEquals(30,underTest.getThirst());
@@ -118,13 +118,13 @@ public class VirtualPetTest {
 	}
 	
 	@Test
-	public void hungryPetGoesToTrainingMinimum0() {
+	public void hungryPetGoesToHappinessMinimumOf0() {
 		VirtualPet underTest = new VirtualPet(50,10,10,null);
 		underTest.tick();
 		assertEquals(0,underTest.getHappiness());
 	}
 	@Test
-	public void thirstyPetGoesToTrainingMinimum0() {
+	public void thirstyPetGoesToHappinessMinimumOf0() {
 		VirtualPet underTest = new VirtualPet(10,50,10,null);
 		underTest.tick();
 		assertEquals(0,underTest.getHappiness());

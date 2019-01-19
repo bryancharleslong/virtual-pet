@@ -33,21 +33,21 @@ public class VirtualPet {
 	public String tick() {
 		if (thirst >= 40) {
 			thirst -= 20;
-			if (happiness <= 40) {
+			hunger++;
+			happiness -= 40;
+			if (happiness < 0) {
 				happiness = 0;
-			} else {
-				happiness -= 40;
 			}
-			return petName + " was thirsty and drank from the toilet.";
+			return petName + " was thirsty and drank from the toilet!";
 		}
 		if (hunger >= 30) {
 			hunger -= 10;
-			if (happiness <= 40) {
+			thirst++;
+			happiness -= 40;
+			if (happiness < 0) {
 				happiness = 0;
-			} else {
-				happiness -= 40;
 			}
-			return petName + " was hungry and got into some extra food.";
+			return petName + " was hungry and got into some extra food!";
 		}
 		hunger++;
 		thirst++;
@@ -65,17 +65,17 @@ public class VirtualPet {
 		}
 	}
 
-	public String menuAction(String menuActionChoice, String menuPlayTypeChoice) {
-		if (menuActionChoice.equals("1")) {
+	public String petAction(String actionChoice, String playTypeChoice) {
+		if (actionChoice.equals("1")) {
 			return feed();
-		} else if (menuActionChoice.equals("2")) {
+		} else if (actionChoice.equals("2")) {
 			return water();
-		} else if (menuActionChoice.equals("3")) {
-			return playWithPet(menuPlayTypeChoice);
-		} else if (menuActionChoice.equals("4")) {
+		} else if (actionChoice.equals("3")) {
+			return playWithPet(playTypeChoice);
+		} else if (actionChoice.equals("4")) {
 			return playGame();
 		}
-		return "Choose 1, 2, 3 or 4";
+		return "";
 	}
 
 	private String feed() {
@@ -96,16 +96,16 @@ public class VirtualPet {
 		return "You fill " + petName + "'s water bowl.";
 	}
 
-	private String playWithPet(String menuPlayTypeChoice) {
-		if (menuPlayTypeChoice.equals("1")) {
+	private String playWithPet(String playTypeChoice) {
+		if (playTypeChoice.equals("1")) {
 			happiness += 3;
 			return "You walk " + petName + ".";
 		}
-		if (menuPlayTypeChoice.equals("2")) {
+		if (playTypeChoice.equals("2")) {
 			happiness += 4;
 			return "You throw the ball with " + petName + ".";
 		}
-		if (menuPlayTypeChoice.equals("3")) {
+		if (playTypeChoice.equals("3")) {
 			happiness += 6;
 			return "You work on teaching tricks to " + petName + ".";
 		}
@@ -117,10 +117,9 @@ public class VirtualPet {
 		if (happiness >= 20) {
 			petResponseToVideoGame = getName() + " waits quietly.";
 		} else {
-			petResponseToVideoGame = getName() + " destroys furniture.";
+			petResponseToVideoGame = getName() + " destroys furniture!";
 		}
 		String[] videoGames = { "StarCraft", "Diablo", "Mario", "Zelda", "Halo" };
 		return "You play " + videoGames[(int) (Math.random() * videoGames.length)] + ". " + petResponseToVideoGame;
 	}
-
 }
