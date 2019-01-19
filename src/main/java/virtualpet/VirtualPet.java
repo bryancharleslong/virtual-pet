@@ -75,7 +75,7 @@ public class VirtualPet {
 		} else if (actionChoice.equals("4")) {
 			return playGame();
 		}
-		return "";
+		return "bad input";
 	}
 
 	private String feed() {
@@ -109,7 +109,7 @@ public class VirtualPet {
 			happiness += 6;
 			return "You work on teaching tricks to " + petName + ".";
 		}
-		return "";
+		return "bad input";
 	}
 
 	private String playGame() {
