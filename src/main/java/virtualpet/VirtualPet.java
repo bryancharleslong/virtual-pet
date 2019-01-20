@@ -31,6 +31,7 @@ public class VirtualPet {
 	}
 
 	public String tick() {
+		String tickMessage;
 		if (thirst >= 40) {
 			thirst -= 20;
 			hunger++;
@@ -38,44 +39,56 @@ public class VirtualPet {
 			if (happiness < 0) {
 				happiness = 0;
 			}
-			return petName + " was thirsty and drank from the toilet!";
-		}
-		if (hunger >= 30) {
+			tickMessage = petName + " was thirsty and drank from the toilet!";
+		} else if (hunger >= 30) {
 			hunger -= 10;
 			thirst++;
 			happiness -= 40;
 			if (happiness < 0) {
 				happiness = 0;
 			}
-			return petName + " was hungry and got into some extra food!";
-		}
-		hunger++;
-		thirst++;
-		if (happiness > 0) {
-			happiness--;
-		}
-		if (thirst >= 35) {
-			return getName() + " looks thirsty.";
-		} else if (hunger >= 25) {
-			return getName() + " looks hungry.";
-		} else if (happiness >= 20) {
-			return getName() + " looks content.";
+			tickMessage = petName + " was hungry and got into some extra food!";
 		} else {
-			return getName() + " looks restless.";
+			hunger++;
+			thirst++;
+			if (happiness > 0) {
+				happiness--;
+			}
+			if (thirst >= 35) {
+				tickMessage = getName() + " looks thirsty.";
+			} else if (hunger >= 25) {
+				tickMessage = getName() + " looks hungry.";
+			} else if (happiness >= 20) {
+				tickMessage = getName() + " looks content.";
+			} else {
+				tickMessage = getName() + " looks restless.";
+			}
+		}
+		return tickMessage;
+	}
+
+	public boolean checkValidInput(String actionChoice, String playTypeChoice) {
+		if ((actionChoice.equals("1") || actionChoice.equals("2") || actionChoice.equals("3")
+				|| actionChoice.equals("4"))
+				&& (playTypeChoice.equals("1") || playTypeChoice.equals("2") || playTypeChoice.equals("3"))) {
+			return true;
+		} else {
+			return false;
 		}
 	}
 
 	public String petAction(String actionChoice, String playTypeChoice) {
+		String actionMessage = "no action";
 		if (actionChoice.equals("1")) {
-			return feed();
+			actionMessage = feed();
 		} else if (actionChoice.equals("2")) {
-			return water();
+			actionMessage = water();
 		} else if (actionChoice.equals("3")) {
-			return playWithPet(playTypeChoice);
+			actionMessage = playWithPet(playTypeChoice);
 		} else if (actionChoice.equals("4")) {
-			return playGame();
+			actionMessage = playGame();
 		}
-		return "bad input";
+		return actionMessage;
 	}
 
 	private String feed() {
@@ -97,19 +110,18 @@ public class VirtualPet {
 	}
 
 	private String playWithPet(String playTypeChoice) {
+		String playMessage = "no play";
 		if (playTypeChoice.equals("1")) {
 			happiness += 3;
-			return "You walk " + petName + ".";
-		}
-		if (playTypeChoice.equals("2")) {
+			playMessage = "You walk " + petName + ".";
+		} else if (playTypeChoice.equals("2")) {
 			happiness += 4;
-			return "You throw the ball with " + petName + ".";
-		}
-		if (playTypeChoice.equals("3")) {
+			playMessage = "You throw the ball with " + petName + ".";
+		} else if (playTypeChoice.equals("3")) {
 			happiness += 6;
-			return "You work on teaching tricks to " + petName + ".";
+			playMessage = "You work on teaching tricks to " + petName + ".";
 		}
-		return "bad input";
+		return playMessage;
 	}
 
 	private String playGame() {
